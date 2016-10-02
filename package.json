@@ -1,0 +1,24 @@
+{
+  "name": "js-boilerplate",
+  "description": "JS Boilerplate",
+  "version": "1.0.0",
+  "author": "Thunraz <julian.dinges@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thunraz/js-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Thunraz/js-boilerplate/issues"
+  },
+  "devDependencies": {
+    "babel-preset-babili": "^0.0.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "pug": "^2.0.0-beta6",
+    "rollup": "^0.36.0",
+    "st": "^1.2.0"
+  }
+}
