@@ -19,7 +19,7 @@ module.exports = () => {
                 author: pkg.author,
                 main: 'electron.js',
                 devDependencies: {
-                    electron: '^1.4.1'
+                    electron: '^1.6.10'
                 },
                 build: {
                     appId: pkg.name,
