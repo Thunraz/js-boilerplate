@@ -14,8 +14,10 @@ module.exports = () => {
     });
 
     gulp.task('server', (done) => {
+        let port = process.env.GULP_PORT || 8080;
+        
         http.createServer(
             st({ path: path.join(__dirname, '..', 'dist'), index: 'index.html', cache: false })
-        ).listen(8080, done);
+        ).listen(port, done);
     });
 };
