@@ -2,7 +2,7 @@
 
 const gulp = require('gulp');
 
-let tasks = ['build', 'css', 'template', 'watch', 'assets', 'electron'];
+let tasks = ['build', 'css', 'template', 'watch', 'assets', 'electron', 'zip'];
 
 // Bootstrap individual task files
 tasks.forEach(
