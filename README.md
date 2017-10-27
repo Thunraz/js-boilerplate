@@ -20,3 +20,4 @@ There are a few gulp tasks predefined:
 * `watch` Starts a local web server that runs on port 8080 (can be overriden using the environment variable GULP_PORT). Rebuilds when files change.
 * `assets` Copies your assets to the destination.
 * `electron` Prepares an electron package (run `npm run dist` in dist directory to create the electron package)
+* `zip` Create a zip archive and prints its file size. Useful for [js13kGames](http://js13kgames.com).
