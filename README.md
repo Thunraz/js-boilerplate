@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/l/express.svg)](https://github.com/Thunraz/js-boilerplate/blob/master/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/expressjs/express.svg)](https://github.com/Thunraz/js-boilerplate/tags)
+
 # js-boilerplate
 
 Just some boilerplate code to get you started with a JavaScript-heavy HTML5 page (e.g. an HTML5 game).
