@@ -1,5 +1,5 @@
-[![npm](https://img.shields.io/npm/l/express.svg)](https://github.com/Thunraz/js-boilerplate/blob/master/LICENSE)
-[![GitHub tag](https://img.shields.io/github/tag/expressjs/express.svg)](https://github.com/Thunraz/js-boilerplate/tags)
+[![npm](https://img.shields.io/github/license/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/blob/master/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/tags)
 
 # js-boilerplate
 
