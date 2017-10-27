@@ -1,29 +1,34 @@
 'use strict';
 
-let gulp        = require('gulp'),
-    rename      = require('gulp-rename'),
-    rollup      = require('rollup').rollup;
+let gulp   = require('gulp'),
+    rollup = require('rollup').rollup;
+
+let cache;
 
 module.exports = () => {
     gulp.task('copy-dependencies', () => {
         return gulp
             .src([
-                // add the files your app depends on
-                './src/electron/electron.js'
+                // add the files your app depends on e.g.:
+                // './src/electron/electron.js'
             ])
             .pipe(gulp.dest('./dist/'))
     });
 
-    gulp.task('build', ['copy-dependencies'], (callback) => {
+    gulp.task('build', ['copy-dependencies'], () => {
         return rollup({
-            entry: 'src/js/main.js',
-            sourceMap: true
+            input: 'src/js/main.js',
+            cache: cache,
+            external: [
+                // add your externals if you have some
+            ]
         }).then(function(bundle) {
             return bundle.write({
-                dest:  'dist/main.js',
+                file:  'dist/main.js',
+                sourcemap: true,
                 format: 'iife',
                 globals: {
-                    // Add your globals if you have some
+                    // add your globals if you have some
                 },
             });
         });
