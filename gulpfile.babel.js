@@ -1,3 +1,4 @@
+import cleanTask         from './tasks/clean';
 import compileMarkupTask from './tasks/compileMarkup';
 import compileScriptTask from './tasks/compileScript';
 import compileStyleTask  from './tasks/compileStyle';
@@ -6,6 +7,8 @@ import gulp              from 'gulp';
 import serveTask         from './tasks/server';
 import watchTask         from './tasks/watch';
 import zipTask           from './tasks/zip';
+
+const clean = (done) => { return cleanTask(done); };
 
 const compileMarkup = (done) => { return compileMarkupTask(done); };
 const compileScript = (done) => { return compileScriptTask(done); };
@@ -16,6 +19,7 @@ const watch      = (done) => { return watchTask(done);      };
 const zip        = (done) => { return zipTask(done);        };
 
 const compile = gulp.series(
+    clean,
     gulp.parallel(
         compileMarkup,
         compileScript,
@@ -32,6 +36,8 @@ serve.description = 'serve compiled source on local server at port 3000';
 const defaultTasks = gulp.parallel(serve, watch);
 
 export {
+    clean,
+    
     copyAssets,
 
     compile,
