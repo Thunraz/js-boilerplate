@@ -1,23 +1,12 @@
 'use strict';
 
-let gulp       = require('gulp'),
-    http       = require('http'),
-    path       = require('path'),
-    st         = require('st');
+import gulp from 'gulp';
 
-module.exports = () => {
-    gulp.task('server', (done) => {
-        let port = process.env.GULP_PORT || 8080;
-        
-        http.createServer(
-            st({ path: path.join(__dirname, '..', 'dist'), index: 'index.html', cache: false })
-        ).listen(port, done);
-    });
+function clearTerminal(done) {
+    process.stdout.write('\x1B[2J\x1B[0f\u001b[0;0H');
+    done();
+}
 
-    gulp.task('watch', gulp.series('server', () => {
-        return gulp.watch(
-            ['src/**/*'],
-            gulp.series(['build', 'css', 'template', 'assets'])
-        );
-    }));
+export default () => {
+    return gulp.watch(['src/*', 'src/**/*'], gulp.series(clearTerminal, 'compile'));
 };

@@ -1,7 +1,6 @@
 'use strict';
 
-let gulp   = require('gulp'),
-    rollup = require('rollup').rollup;
+const rollup = require('rollup').rollup;
 
 let cache;
 
@@ -24,15 +23,6 @@ function build() {
     });
 }
 
-module.exports = () => {
-    gulp.task('copy-dependencies', () => {
-        return gulp
-            .src([
-                // add the files your app depends on e.g.:
-                './src/electron/electron.js'
-            ])
-            .pipe(gulp.dest('./dist/'))
-    });
-
-    gulp.task('build', gulp.series('copy-dependencies', build));
+export default () => {
+    return build();
 };

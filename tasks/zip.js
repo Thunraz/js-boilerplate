@@ -7,6 +7,33 @@ let gulp     = require('gulp'),
     uglify   = require('gulp-uglify-es').default,
     zip      = require('gulp-zip');
 
+function minify() {
+    return new Promise((resolve, reject) => {
+        gulp
+            .src('dist/main.js')
+            .pipe(uglify())
+            .pipe(rename('main.min.js'))
+            .pipe(gulp.dest('dist'))
+        resolve();
+    });
+}
+
+function createZip() {
+    return new Promise((resolve, reject) => {
+        gulp
+            .src([
+                './dist/main.min.js',
+                './dist/*.css',
+                './dist/index.html',
+                './dist/assets/**/*'
+            ], { base: 'dist' })
+            .pipe(zip('dist.zip'))
+            .pipe(gulp.dest('dist'))
+            .pipe(getZipSize());
+        resolve();
+    });
+}
+
 function getZipSize(inKib) {
     return through.obj(function(file, encoding, callback) {
         let filenameShort = file.path.split(/\/|\\/).pop()
@@ -27,25 +54,8 @@ function getZipSize(inKib) {
     });
 }
 
-module.exports = () => {
-    gulp.task('minify', gulp.series(['build', 'css', 'template', 'assets'], () => {
-        return gulp
-            .src('dist/main.js')
-            .pipe(uglify())
-            .pipe(rename('main.min.js'))
-            .pipe(gulp.dest('dist'));
-    }));
-
-    gulp.task('zip', gulp.series('minify', () => {
-        return gulp
-            .src([
-                './dist/main.min.js',
-                './dist/*.css',
-                './dist/index.html',
-                './dist/assets/**/*'
-            ], { base: 'dist' })
-            .pipe(zip('dist.zip'))
-            .pipe(gulp.dest('dist'))
-            .pipe(getZipSize());
-    }));
+export default (done) => {
+    minify()
+        .then(createZip)
+        .then(done);
 };
