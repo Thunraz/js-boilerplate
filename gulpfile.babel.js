@@ -38,13 +38,7 @@ const defaultTasks = gulp.parallel(serve, watch);
 
 export {
     clean,
-
-    copyAssets,
-
     compile,
-    compileMarkup,
-    compileScript,
-    compileStyle,
     
     watch
 };
