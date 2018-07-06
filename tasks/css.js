@@ -1,3 +1,5 @@
+'use strict';
+
 let css    = require('gulp-concat-css'),
     gulp   = require('gulp'),
     uglify = require('gulp-uglifycss');
