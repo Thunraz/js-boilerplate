@@ -6,13 +6,6 @@ let gulp       = require('gulp'),
     st         = require('st');
 
 module.exports = () => {
-    gulp.task('watch', ['server'], () => {
-        return gulp.watch(
-            ['src/js/**/*.js', 'src/sass/**/*.s?ss', 'src/index.pug', 'src/assets/*', 'src/assets/**/*'],
-            ['build', 'css', 'template', 'assets']
-        );
-    });
-
     gulp.task('server', (done) => {
         let port = process.env.GULP_PORT || 8080;
         
@@ -20,4 +13,11 @@ module.exports = () => {
             st({ path: path.join(__dirname, '..', 'dist'), index: 'index.html', cache: false })
         ).listen(port, done);
     });
+
+    gulp.task('watch', gulp.series('server', () => {
+        return gulp.watch(
+            ['src/**/*'],
+            gulp.series(['build', 'css', 'template', 'assets'])
+        );
+    }));
 };
