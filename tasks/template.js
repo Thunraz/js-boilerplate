@@ -27,7 +27,7 @@ function readFile(fname) {
 }
 
 module.exports = () => {
-    gulp.task('template', ['css'], (done) => {
+    gulp.task('template', gulp.series('css', (done) => {
         readFile('./src/index.pug')
             .then((str) => {
                 // development index file
@@ -35,5 +35,5 @@ module.exports = () => {
                 return writeFile('./dist/index.html', result);
             })
             .then(done);
-    });
+    }));
 };

@@ -9,4 +9,6 @@ tasks.forEach(
     (task) => require(`./tasks/${task}`)()
 );
 
-gulp.task('default', tasks.filter((x) => {return x != 'watch'}));
+let filteredTasks = tasks.filter((x) => { return x != 'watch' });
+
+gulp.task('default', gulp.series(filteredTasks));
