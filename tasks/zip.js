@@ -36,7 +36,7 @@ function createZip() {
 
 function getZipSize(inKib) {
     return through.obj(function(file, encoding, callback) {
-        let filenameShort = file.path.split(/\/|\\/).pop()
+        let filenameShort = file.path.split(/\/|\\/).pop();
 
         // Check if we're dealing with a file or a buffer
         let byteSize = file.stat ? file.stat.size : Buffer.byteLength(String(file.contents));
