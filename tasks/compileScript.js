@@ -6,12 +6,22 @@ const rollup = require('rollup').rollup;
 
 let cache;
 
+function copyDependencies() {
+    return gulp
+        .src([
+            // Add dependency files here
+            // e.g. './node_modules/three/build/three.js'
+        ])
+        .pipe(gulp.dest('./dist/'))
+}
+
 function build() {
     return rollup({
         input: 'src/js/main.js',
         cache: cache,
         external: [
             // add your externals if you have some
+            // e.g. 'three'
         ]
     }).then(function(bundle) {
         return bundle.write({
@@ -43,6 +53,7 @@ function lint() {
 }
 
 export default gulp.series(
+    copyDependencies,
     build,
     lint
 );
