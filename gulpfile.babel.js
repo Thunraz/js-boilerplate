@@ -4,7 +4,7 @@ import compileScriptTask from './tasks/compileScript';
 import compileStyleTask  from './tasks/compileStyle';
 import copyAssetsTask    from './tasks/copyAssets'
 import gulp              from 'gulp';
-import serveTask         from './tasks/server';
+import serverTask        from './tasks/server';
 import watchTask         from './tasks/watch';
 import zipTask           from './tasks/zip';
 
@@ -15,6 +15,7 @@ const compileScript = (done) => { return compileScriptTask(done); };
 const compileStyle  = (done) => { return compileStyleTask(done);  };
 
 const copyAssets = (done) => { return copyAssetsTask(done); };
+const server     = (done) => { return serverTask(done);     };
 const watch      = (done) => { return watchTask(done);      };
 const zip        = (done) => { return zipTask(done);        };
 
@@ -30,22 +31,20 @@ const compile = gulp.series(
 );
 compile.description = 'compile all sources';
 
-const serve = gulp.series(compile, serveTask);
+const serve = gulp.series(compile, server);
 serve.description = 'serve compiled source on local server at port 3000';
 
 const defaultTasks = gulp.parallel(serve, watch);
 
 export {
     clean,
-    
+
     copyAssets,
 
     compile,
     compileMarkup,
     compileScript,
     compileStyle,
-    
-    serve,
     
     watch
 };
