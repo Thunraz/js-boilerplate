@@ -1,37 +1,41 @@
 'use strict';
 
-let gulp     = require('gulp'),
-    gutil    = require('gulp-util'),
-    rename   = require('gulp-rename'),
-    through  = require('through2'),
-    uglify   = require('gulp-uglify-es').default,
-    zip      = require('gulp-zip');
+let clean   = require('gulp-clean'),
+    gulp    = require('gulp'),
+    gutil   = require('gulp-util'),
+    through = require('through2'),
+    uglify  = require('gulp-uglify-es').default,
+    zip     = require('gulp-zip');
 
-function minify() {
-    return new Promise((resolve, reject) => {
-        gulp
-            .src('dist/main.js')
-            .pipe(uglify())
-            .pipe(rename('main.min.js'))
-            .pipe(gulp.dest('dist'))
-        resolve();
-    });
+function minifyJS() {
+    return gulp
+        .src('dist/main.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/temp'));
+};
+
+function copyDistFiles() {
+    return gulp
+        .src([
+            './dist/*.css',
+            './dist/index.html',
+            './dist/assets/**/*'
+        ], { base: 'dist' })
+        .pipe(gulp.dest('dist/temp/'));
 }
 
 function createZip() {
-    return new Promise((resolve, reject) => {
-        gulp
-            .src([
-                './dist/main.min.js',
-                './dist/*.css',
-                './dist/index.html',
-                './dist/assets/**/*'
-            ], { base: 'dist' })
-            .pipe(zip('dist.zip'))
-            .pipe(gulp.dest('dist'))
-            .pipe(getZipSize());
-        resolve();
-    });
+    return gulp
+        .src(['./dist/temp/*', './dist/temp/**/*'])
+        .pipe(zip('dist.zip'))
+        .pipe(gulp.dest('dist'))
+        .pipe(getZipSize());
+}
+
+function deleteTempDir() {
+    return gulp
+        .src('./dist/temp')
+        .pipe(clean());
 }
 
 function getZipSize(inKib) {
@@ -54,8 +58,9 @@ function getZipSize(inKib) {
     });
 }
 
-export default (done) => {
-    minify()
-        .then(createZip)
-        .then(done);
-};
+export default gulp.series(
+    minifyJS,
+    copyDistFiles,
+    createZip,
+    deleteTempDir
+);
