@@ -33,8 +33,5 @@
     "rollup": "^0.62.0",
     "st": "^1.2.2",
     "through2": "^2.0.3"
-  },
-  "dependencies": {
-    "babel-core": "^6.26.3"
   }
 }
