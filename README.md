@@ -1,5 +1,5 @@
 [![npm](https://img.shields.io/github/license/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/blob/master/LICENSE)
-[![GitHub tag](https://img.shields.io/github/tag/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/tags)
+[![GitHub tag](https://img.shields.io/github/tag/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/tags) [![Greenkeeper badge](https://badges.greenkeeper.io/Thunraz/js-boilerplate.svg)](https://greenkeeper.io/)
 
 # js-boilerplate
 
