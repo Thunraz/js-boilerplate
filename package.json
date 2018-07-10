@@ -29,12 +29,9 @@
     "gulp-util": "^3.0.8",
     "gulp-zip": "^4.0.0",
     "minimatch": "^3.0.4",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^2.0.3",
     "rollup": "^0.62.0",
     "st": "^1.2.2",
     "through2": "^2.0.3"
-  },
-  "dependencies": {
-    "babel-core": "^6.26.3"
   }
 }
