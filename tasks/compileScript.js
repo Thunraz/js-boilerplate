@@ -6,13 +6,19 @@ const rollup = require('rollup').rollup;
 
 let cache;
 
-function copyDependencies() {
-    return gulp
-        .src([
-            // Add dependency files here
-            // e.g. './node_modules/three/build/three.js'
-        ])
-        .pipe(gulp.dest('./dist/'))
+function copyDependencies(done) {
+    let dependencies = [
+        // Add globs to dependency files here
+        // e.g. './node_modules/three/build/three.js'
+    ];
+
+    if(dependencies.length === 0) {
+        done();
+    } else {
+        return gulp
+            .src(dependencies)
+            .pipe(gulp.dest('./dist/'))
+    }
 }
 
 function build() {
