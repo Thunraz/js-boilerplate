@@ -1,5 +1,6 @@
 [![npm](https://img.shields.io/github/license/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/blob/master/LICENSE)
 [![GitHub tag](https://img.shields.io/github/tag/thunraz/js-boilerplate.svg)](https://github.com/Thunraz/js-boilerplate/tags)
+[![Build Status](https://travis-ci.org/Thunraz/js-boilerplate.svg?branch=master)](https://travis-ci.org/Thunraz/js-boilerplate)
 
 # js-boilerplate
 
