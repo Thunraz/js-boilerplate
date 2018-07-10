@@ -1,7 +1,7 @@
 {
   "name": "js-boilerplate",
   "description": "JS Boilerplate",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Thunraz <thunraz@thunraz.com>",
   "license": "MIT",
   "repository": {
@@ -16,9 +16,11 @@
     "dev": "gulp"
   },
   "devDependencies": {
+    "ansi-colors": "^2.0.2",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.0.1",
+    "fancy-log": "^1.3.2",
     "gulp": "^4.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-concat-css": "^3.1.0",
@@ -26,7 +28,6 @@
     "gulp-rename": "^1.2.3",
     "gulp-uglify-es": "^1.0.1",
     "gulp-uglifycss": "^1.1.0",
-    "gulp-util": "^3.0.8",
     "gulp-zip": "^4.0.0",
     "minimatch": "^3.0.4",
     "pug": "^2.0.3",
