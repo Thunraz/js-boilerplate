@@ -1,5 +1,10 @@
 'use strict';
 
+// Set up the constants how you need them
+const MAX_ZIP_SIZE_CHECK = true;
+const MAX_ZIP_SIZE_BYTES = 13312;
+const ZIP_SIZE_IN_KIB    = false;
+
 let colors  = require('ansi-colors'),
     clean   = require('gulp-clean'),
     flog    = require('fancy-log'),
@@ -30,7 +35,7 @@ function createZip() {
         .src(['./dist/temp/*', './dist/temp/**/*'])
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest('dist'))
-        .pipe(getZipSize());
+        .pipe(getZipSize(ZIP_SIZE_IN_KIB));
 }
 
 function deleteTempDir() {
@@ -39,21 +44,48 @@ function deleteTempDir() {
         .pipe(clean());
 }
 
-function getZipSize(inKib) {
+function formatSize(size, inKiB) {
+    let formattedSize = size;
+
+    if(inKiB) {
+        formattedSize = Math.round(formattedSize * 100 / 1024) / 100;
+    }
+
+    formattedSize = formattedSize.toLocaleString();
+    formattedSize += inKiB ? ' KiB' : ' B';
+
+    return formattedSize;
+}
+
+function getZipSize(inKiB) {
     return through.obj(function(file, encoding, callback) {
         let filenameShort = file.path.split(/\/|\\/).pop();
 
         // Check if we're dealing with a file or a buffer
         let byteSize = file.stat ? file.stat.size : Buffer.byteLength(String(file.contents));
-        
-        let formattedSize = byteSize;
-        if(inKib === true) {
-            formattedSize /= 1024;
-        }
-        formattedSize = formattedSize.toLocaleString();
-        formattedSize += inKib ? ' KiB' : ' B';
 
-        flog('Size', colors.cyan(filenameShort), ':', colors.magenta(formattedSize));
+        flog(
+            'ZIP Size',
+            colors.cyan(filenameShort),
+            colors.magenta(formatSize(byteSize, inKiB))
+        );
+
+        if(MAX_ZIP_SIZE_CHECK === true) {
+            if(byteSize <= MAX_ZIP_SIZE_BYTES) {
+                flog(
+                    colors.green('Inside ZIP size limit'),
+                    colors.magenta(formatSize(byteSize, inKiB), colors.green('/'), formatSize(MAX_ZIP_SIZE_BYTES, inKiB)),
+                    colors.green('(') +
+                    colors.magenta(formatSize(MAX_ZIP_SIZE_BYTES - byteSize, inKiB)),
+                    colors.green('left)')
+                );
+            } else {
+                flog(
+                    colors.red('Exceeded max ZIP size limit:'),
+                    colors.magenta(formatSize(byteSize, inKiB), colors.red('/'), formatSize(MAX_ZIP_SIZE_BYTES, inKiB))
+                );
+            }
+        }
 
         callback(null, file);
     });
