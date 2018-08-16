@@ -16,7 +16,7 @@
     "dev": "gulp"
   },
   "devDependencies": {
-    "ansi-colors": "^2.0.2",
+    "ansi-colors": "^3.0.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.0.1",
